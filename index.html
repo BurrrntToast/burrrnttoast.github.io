@@ -1,23 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title> better soon </title>
-    <link rel="stylesheet" href="stylesheet.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bouncing Example</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #eee; 
+      overflow: hidden;
+    }
+    #text {
+      color: #f9f9f9;  
+      background-color: #111; 
+      font-size: 50px;
+      font-family: Arial, sans-serif;
+      position: absolute;
+      cursor: pointer;
+      padding: 10px 20px; /* padding around the text */
+      border-radius: 10px; 
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    }
+  </style>
 </head>
-
 <body>
+  <div id="text">burnttoastdev</div>
 
-    <div class="container">
+  <script>
+    const titletextElement = document.getElementById("text");
+    const speed = 4.5; // Increased speed
+    let posX = 0;
+    let posY = 0;
+    let directionX = speed;
+    let directionY = speed;
 
+    const linkUrl = "https://theburnttoast.newgrounds.com/";
 
-    <div class="title">
-        <h1> - Games - </h1>
-    </div>
+    function bounceText() {
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      const textWidth = titletextElement.offsetWidth;
+      const textHeight = titletextElement.offsetHeight;
 
-    <div class="games">
-        <iframe frameborder="0" src="https://itch.io/embed/2646055?border_width=0&amp;bg_color=aeb3fe&amp;fg_color=000000&amp;link_color=0004fc&amp;border_color=aeb3fe" width="550" height="165"><a href="https://burnttoastdev.itch.io/bergs">bergs by burnttoastdev, CaineTinyArms</a></iframe>    </div>
-    </div>
+      posX += directionX;
+      posY += directionY;
 
+      // right and left
+      if (posX + textWidth >= screenWidth || posX <= 0) {
+        directionX = -directionX; // invert direction
+      }
+
+      // top and bottom
+      if (posY + textHeight >= screenHeight || posY <= 0) {
+        directionY = -directionY;
+      }
+
+      // updated text pos
+      titletextElement.style.left = posX + "px";
+      titletextElement.style.top = posY + "px";
+
+      requestAnimationFrame(bounceText);
+    }
+
+    // start bouncing 
+    bounceText();
+
+    titletextElement.addEventListener("click", () => {
+      window.open(linkUrl, "_blank");
+    });
+  </script>
 </body>
-
 </html>
