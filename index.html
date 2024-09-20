@@ -30,8 +30,16 @@
   <script>
     const titletextElement = document.getElementById("titleText");
     const speed = 4.5; // Increased speed
-    let posX = 0;
-    let posY = 0;
+
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const textWidth = titletextElement.offsetWidth;
+    const textHeight = titletextElement.offsetHeight;
+
+    let posX = Math.random() * (screenWidth - textWidth);
+    let posY = Math.random() * (screenHeight - textHeight);
+
     let directionX = speed;
     let directionY = speed;
 
@@ -40,8 +48,6 @@
     function bounceText() {
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
-      const textWidth = titletextElement.offsetWidth;
-      const textHeight = titletextElement.offsetHeight;
 
       posX += directionX;
       posY += directionY;
